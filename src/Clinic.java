@@ -67,35 +67,17 @@ public class Clinic{
         System.out.println(TimeForClinicRun);
 
         int k = 0;
-//        for(int i = 0; i < TimeForClinicRun; i++){ //problematic logic
-//
-////            System.out.println("Patient's Time: " + patients[k].getTimeOfArrival());
-//
-////            if(timer.compare(patients[k].getTimeOfArrival()) == 0){
-////                System.out.println("Patient's Time: " + patients[k].getTimeOfArrival());
-////                wq.insert(patients[k], calculatePriorityLevel(patients[k]));
-////                k++;
-////            }
-//
-//
-////            timer.increase();
-//        }
+        for(int i = 0; i < TimeForClinicRun; i++){ //problematic logic
 
-        System.out.println(timer.compare(patients[1].getTimeOfArrival()));
-        timer.increase();
+            System.out.println("Patient's Time: " + patients[k].getTimeOfArrival());
 
-        while(true) {
-            if(timer.compare(patients[4].getTimeOfArrival()) == 0){
-                System.out.println("Timer Class: " + timer);
-                System.out.println("Patient Entry Time: " + patients[4].getTimeOfArrival());
-                System.out.println(timer.compare(patients[4].getTimeOfArrival()));
-                break;
+            if(timer.compare(patients[k].getTimeOfArrival()) == 0){
+                System.out.println("Patient's Time: " + patients[k].getTimeOfArrival());
+                wq.insert(patients[k], calculatePriorityLevel(patients[k]));
+                k++;
             }
             timer.increase();
-
         }
-
-
     }
 
     public int calculatePriorityLevel(Patient patient){

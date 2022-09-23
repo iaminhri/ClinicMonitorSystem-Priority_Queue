@@ -47,18 +47,10 @@ public class Timer{
     public int compare(String clinicData) {
 
         /**  if hour is less than adds 0 before the digit else keeps the same value  */
-        if(getHour() < 10)
-            str = "0" + this.hour;
-        else
-            str = "" + this.hour;
 
-        /**  if minute is less than adds 0 before the digit else keeps the same value  */
-        if(getMinute() < 10)
-            str1 = "0" + this.minute;
-        else
-            str1 = "" + this.minute;
 
-        this.fStr = str + ":" + str1;
+        this.fStr = convertToString(this.hour, this.minute);
+
         System.out.println("Final String of Time: " + fStr);
         // compares two strings and contains
         int comp = fStr.compareTo(clinicData);
@@ -83,8 +75,22 @@ public class Timer{
         return vxtime;
     }
 
+    public String convertToString(int hour, int minute){
+        if(getHour() < 10)
+            str = "0" + this.hour;
+        else
+            str = "" + this.hour;
+
+        /**  if minute is less than adds 0 before the digit else keeps the same value  */
+        if(getMinute() < 10)
+            str1 = "0" + this.minute;
+        else
+            str1 = "" + this.minute;
+        return str + ":" + str1;
+    }
+
     public String toString(){
-        return fStr;
+        return convertToString(this.hour, this.minute);
     }
 
 }
