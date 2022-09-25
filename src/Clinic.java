@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Clinic{
 
-    public Patient [] patients = new Patient[16];
+    public Patient [] patients = new Patient[17];
     WaitQueue wq = new WaitQueue();
 
     public Clinic(){
@@ -19,18 +19,14 @@ public class Clinic{
     public void readData() throws FileNotFoundException {
         //reads data from file
         File readFile = new File("H:\\DataStructure\\COSC2P03_A1_v2\\COSC2P03_A1_v2\\patients.txt");
-        Scanner sc = new Scanner(readFile);
+        Scanner input = new Scanner(readFile);
 
         int i = 0;
-
-        while(sc.hasNextLine()){
-            String s = sc.nextLine();
+        while(input.hasNextLine()){
+            String s = input.nextLine();
             patients[i] = new Patient(s);
             i++;
         }
-//        for(int j = 1; j < patients.length; j++){
-//            System.out.println(patients[j]);
-//        }
     }
 
     public void Monitor(){
@@ -43,15 +39,6 @@ public class Clinic{
          * a patient is ready to enter the queue or not.
          */
 
-//        String str = patients[patients.length-1].getTimeOfArrival();
-
-//        int lastHour, lastMinute;
-//        String temp[];
-//        temp = str.split(":");
-//
-//        lastHour = Integer.parseInt(temp[0]);
-//        lastMinute = Integer.parseInt(temp[1]);
-
         Timer timer = new Timer();
 
         /**
@@ -60,23 +47,28 @@ public class Clinic{
          * + 15 added -> is for vx time for the last patient.
          */
 
-//        int TimeForClinicRun = ( ( ( lastHour - maintainTimer.getHour() ) * 60 ) +
-//         ((lastMinute > maintainTimer.getMinute()) ? lastMinute - maintainTimer.getMinute():
-//           maintainTimer.getMinute() - lastMinute) );
         int TimeForClinicRun = (patients.length-1) * 15;
-        System.out.println(TimeForClinicRun);
 
-        int k = 0;
+
+        int k = 1;
         for(int i = 0; i < TimeForClinicRun; i++){ //problematic logic
-
-            System.out.println("Patient's Time: " + patients[k].getTimeOfArrival());
-
-            if(timer.compare(patients[k].getTimeOfArrival()) == 0){
-                System.out.println("Patient's Time: " + patients[k].getTimeOfArrival());
+            if(k <= 15 && timer.compare(patients[k].getTimeOfArrival()) == 0
+                    ){ //Inserts patients in the queue.
                 wq.insert(patients[k], calculatePriorityLevel(patients[k]));
                 k++;
             }
-            timer.increase();
+            if(timer.increase() && wq != null){ //Removes Patients from queue.
+                try{
+                    System.out.println("Patient Name: " + wq.getPeekItem().PatientData.getPatientName()
+                            + " Arrival Time: " + wq.getPeekItem().PatientData.getTimeOfArrival()
+                            + " Check Out Time: " + timer);
+                    wq.removeMax();
+                }catch(NullPointerException e){
+                    System.out.println(" ");
+                }
+            }
+            if( k >= 16)
+                patients = null;
         }
     }
 

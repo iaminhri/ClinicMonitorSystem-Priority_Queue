@@ -17,7 +17,7 @@ public class Patient {
     }
 
     public Patient(String dataStream) throws NumberFormatException{
-        String temp[] = new String[6];
+        String []temp = new String[6];
         temp = dataStream.split("\t");
 
         setPatientName( temp[0] );
@@ -31,13 +31,13 @@ public class Patient {
         setHealthCondition( temp[4] );
         setTimeOfArrival( temp[5] );
 
-
-        System.out.println(getPatientName());
-        System.out.println(getGender());
-        System.out.println(getAge());
-        System.out.println(getOccupation());
-        System.out.println(getHealthCondition());
-        System.out.println(getTimeOfArrival());
+//
+//        System.out.println(getPatientName());
+//        System.out.println(getGender());
+//        System.out.println(getAge());
+//        System.out.println(getOccupation());
+//        System.out.println(getHealthCondition());
+//        System.out.println(getTimeOfArrival());
     }
 
     public String getPatientName() {

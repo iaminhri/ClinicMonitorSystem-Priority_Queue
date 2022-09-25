@@ -2,13 +2,30 @@
 public class WaitQueue {
     //Attributes
     Node _dll_head;
+    Node front, rear;
+    int priorityLevel;
 
     public WaitQueue(){
         _dll_head = null;
+        front = rear = null;
+        priorityLevel = 0;
     }
 
-    public void removeMax() {
+    public Node removeMax() {
+        Node temp;
         //remove Max using DL_List based on queue
+        if(front.next == null){
+            front = null;
+            _dll_head = null;
+        }
+        else{
+            front = front.next;
+            front.prev = null;
+            _dll_head = front;
+        }
+        temp = front;
+
+        return front;
     }
 
     /**
@@ -17,44 +34,122 @@ public class WaitQueue {
      */
     public void insert(Patient dataStream, int priorityLevel){
         //insert using DL_List based on queue
-        Node newNode = new Node(dataStream, priorityLevel);;
+        Node newNode = new Node(dataStream, priorityLevel);
+        Node p;
 
-        if(_dll_head == null) {
+        if(_dll_head == null || front == null) {
             _dll_head = newNode;
+            front = rear = _dll_head;
+        }
+        else if(priorityLevel > front.priorityLevel){
+            newNode.next = front.next;
+            if(front.next != null){
+                front.next.prev = newNode;
+            }
+            front.next = newNode;
+            newNode.prev = front;
         }
         else{
-            if(priorityLevel > _dll_head.priorityLevel) {
-                _dll_head.prev = newNode;
-                newNode.next = _dll_head;
-                _dll_head = newNode;
+            p = front;
+
+            while(p.next != null){
+                if(priorityLevel > p.priorityLevel){
+                    break;
+                }
+                p = p.next;
+            }
+            if(priorityLevel > p.priorityLevel){
+                newNode.prev = p.prev;
+                if(p.prev != null){
+                    p.prev.next = newNode;
+                }
+                p.prev = newNode;
+                newNode.next = p;
+            }
+            else if(priorityLevel <= rear.priorityLevel &&
+                    ( dataStream.getTimeOfArrival().compareTo(rear.PatientData.getTimeOfArrival()) > 0 )){
+                rear.next = newNode;
+                newNode.prev = rear;
+                rear = newNode;
             }
             else{
-                Node rotator = _dll_head;
-                while(rotator.next != null){
-                    if(priorityLevel < rotator.priorityLevel){
-                        break;
+                p = front;
+
+                while(p.next != null && priorityLevel == p.priorityLevel &&
+                      dataStream.getTimeOfArrival().compareTo(p.PatientData.getTimeOfArrival()) < 0){
+                    p = p.next;
+                }
+
+                if(dataStream.getTimeOfArrival().compareTo(p.PatientData.getTimeOfArrival()) < 0){
+                    //adding node before
+                    newNode.next = p.next;
+                    if(p.next != null)
+                        p.next.prev = newNode;
+                    p.next = newNode;
+                    newNode.prev = p;
+                }
+                else{
+                    //adding node after.
+                    newNode.next = p.next;
+                    if(p.next != null){
+                        p.next.prev = newNode;
                     }
-                    rotator = rotator.next;
+                    p.next = newNode;
+                    newNode.prev = p;
                 }
 
-                if(rotator.next != null){
-                    newNode.next = rotator.next;
-                    rotator.next.prev = newNode;
-                }
-
-                rotator.next = newNode;
-                newNode.prev = rotator;
             }
         }
     }
 
-    public void display(){
-        Node p = _dll_head;
-
-        while(p != null){
-            System.out.println("Data: " + p.PatientData
-                    + " Priority Level: " + p.priorityLevel);
-            p = p.next;
-        }
+    public Node getPeekItem(){
+        return _dll_head;
     }
+
+//    public void displayNodes(Node head){
+//        Node p = head;
+//        while (p.next != null){
+//            System.out.println(p.PatientData);
+//            p = p.next;
+//        }
+//    }
+
 }
+
+//    public void insert(Patient dataStream, int priorityLevel){
+//        //insert using DL_List based on queue
+//        Node newNode = new Node(dataStream, priorityLevel);
+//        Node p;
+//
+//        if(_dll_head == null || front == null) {
+//            _dll_head = newNode;
+//            front = rear = _dll_head;
+//        }
+//        else{
+//            p = front;
+//            if(priorityLevel == p.priorityLevel){
+//                while(p.next != null && priorityLevel == p.priorityLevel && dataStream.getTimeOfArrival().compareTo(p.PatientData.getTimeOfArrival()) >= 0){
+//                    p = p.next;
+//                }
+//
+//                if(p.next != null){
+//                    newNode.next = p.next;
+//                    p.next.prev = newNode;
+//                }
+//                p.next = newNode;
+//                newNode.prev = p;
+//            }
+//            else if(priorityLevel > front.priorityLevel){
+//                _dll_head.prev = newNode;
+//                newNode.next = _dll_head;
+//                _dll_head = newNode;
+//                front = newNode;
+//            }
+//            else if(priorityLevel <= rear.priorityLevel &&
+//                    ( dataStream.getTimeOfArrival().compareTo(rear.PatientData.getTimeOfArrival()) > 0 )){
+//                rear.next = newNode;
+//                newNode.prev = rear;
+//                rear = newNode;
+//            }
+//        }
+//    }

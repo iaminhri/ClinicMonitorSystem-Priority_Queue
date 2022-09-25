@@ -15,49 +15,36 @@ public class Timer{
 
         this.hour = Integer.parseInt(temp[0]);
         this.minute = Integer.parseInt(temp[1]);
-        this.vxtime = 1;
-
+        this.vxtime = 0;
     }
 
     public boolean increase(){
-        int m = this.minute;
-        int v = this.vxtime;
-        int h = this.hour;
 
-        if(m == 60) {
-            h++;
-            m = 0;
+        this.minute++;
+        this.vxtime++;
+
+        if(this.minute == 60) {
+            this.hour++;
+            this.minute = 0;
         }
 
-        m++;
-        v++;
-
-        this.minute = m;
-        this.vxtime = v;
-        this.hour = h;
-
-        if(v == 15) {
+        if(this.vxtime >= 15) {
             this.vxtime = 0;
-            return true;
+            return true; // remove from clinic
         }
         else
-            return false;
+            return false; // is In clinic
     }
 
     public int compare(String clinicData) {
 
         /**  if hour is less than adds 0 before the digit else keeps the same value  */
 
-
         this.fStr = convertToString(this.hour, this.minute);
-
-        System.out.println("Final String of Time: " + fStr);
-        // compares two strings and contains
-        int comp = fStr.compareTo(clinicData);
 
         if(clinicData.equals(fStr))
             return 0;
-        else if(comp < 0)
+        else if(fStr.compareTo(clinicData) < 0)
             return -1;
         else
             return 1;
@@ -69,10 +56,6 @@ public class Timer{
 
     public int getMinute() {
         return minute;
-    }
-
-    public int getVxtime() {
-        return vxtime;
     }
 
     public String convertToString(int hour, int minute){
@@ -92,10 +75,4 @@ public class Timer{
     public String toString(){
         return convertToString(this.hour, this.minute);
     }
-
 }
-
-
-//System.out.println("Hour: " + this.hour + "Minute: " + this.minute);
-//
-
