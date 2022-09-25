@@ -18,7 +18,7 @@ public class Clinic{
 
     public void readData() throws FileNotFoundException {
         //reads data from file
-        File readFile = new File("H:\\DataStructure\\COSC2P03_A1_v2\\COSC2P03_A1_v2\\patients.txt");
+        File readFile = new File("patients.txt");
         Scanner input = new Scanner(readFile);
 
         int i = 0;
@@ -88,7 +88,6 @@ public class Clinic{
            patient.getHealthCondition().equals("Primary Immune Deficiency") ||
            patient.getHealthCondition().equals("Cardiovascular Disease"))
             pL++;
-
         return pL;
     }
 }

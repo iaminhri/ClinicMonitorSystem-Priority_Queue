@@ -1,0 +1,15 @@
+Patient Name: Carol Young Arrival Time: 09:01 Check Out Time: 09:16
+Patient Name: Eric Chen Arrival Time: 09:13 Check Out Time: 09:31
+Patient Name: Rachael Taylor Arrival Time: 09:04 Check Out Time: 09:46
+Patient Name: Diana Fraser Arrival Time: 09:34 Check Out Time: 10:01
+Patient Name: Peter Russell Arrival Time: 09:46 Check Out Time: 10:16
+Patient Name: Kelly Walter Arrival Time: 10:12 Check Out Time: 10:31
+Patient Name: Steve Kerry Arrival Time: 10:27 Check Out Time: 10:46
+Patient Name: Alice Wood Arrival Time: 09:53 Check Out Time: 11:01
+Patient Name: Joe Osteen Arrival Time: 10:06 Check Out Time: 11:16
+Patient Name: Esther Valley Arrival Time: 10:23 Check Out Time: 11:31
+Patient Name: Terry Apple Arrival Time: 10:41 Check Out Time: 11:46
+Patient Name: Kevin Murphy Arrival Time: 09:03 Check Out Time: 12:01
+Patient Name: Amy Singh Arrival Time: 09:28 Check Out Time: 12:16
+Patient Name: David Zelensky Arrival Time: 09:59 Check Out Time: 12:31
+Patient Name: Fiona Bruce Arrival Time: 10:36 Check Out Time: 12:46

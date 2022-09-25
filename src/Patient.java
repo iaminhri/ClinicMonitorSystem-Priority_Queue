@@ -30,14 +30,6 @@ public class Patient {
         setOccupation( temp[3] );
         setHealthCondition( temp[4] );
         setTimeOfArrival( temp[5] );
-
-//
-//        System.out.println(getPatientName());
-//        System.out.println(getGender());
-//        System.out.println(getAge());
-//        System.out.println(getOccupation());
-//        System.out.println(getHealthCondition());
-//        System.out.println(getTimeOfArrival());
     }
 
     public String getPatientName() {
@@ -94,12 +86,3 @@ public class Patient {
                 " TimeOfArrival: " + timeOfArrival + " ]";
     }
 }
-
-
-//
-//        System.out.println(getPatientName());
-//        System.out.println(getGender());
-//        System.out.println(getAge());
-//        System.out.println(getOccupation());
-//        System.out.println(getHealthCondition());
-//        System.out.println(getTimeOfArrival());
